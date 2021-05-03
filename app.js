@@ -30,9 +30,15 @@ app.use(authRoutes)
 // cookies
 app.get('/set-cookies', (req, res) => {
     // res.setHeader('Set-Cookie', 'newUser=true')
+
+    res.cookie('newUser', false)
+    // when secure: true https only
+    res.cookie('isEmployee', true, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true })
+    
     res.send('you got the cookies!')
 })
 
 app.get('/read-cookies', (req, res) => {
-
+    const cookies = req.cookies
+    res.json(cookies)
 })
